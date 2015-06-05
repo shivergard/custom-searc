@@ -21,14 +21,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Results</div>
 				<div class="panel-body">
-					<div class="row">
-					   <div class="col-md-8">
-					        <div>Div 1 text</div>
-					        <div>Div 2 text</div>
-					   </div>
-					   <div class="col-md-4">
-					        <img src="test.png" class="img-responsive"/>
-					   </div>
+					<div class="row" id="result_row">
+
 					</div>
 				</div>
 			</div>
@@ -69,12 +63,23 @@
 		});
     };
 
+    window.renderResults = function (data){
+    	$('#result_row').html(Mustache.render(window.template, data));
+    }    	
+
     window.ajaxSuccess = function(data){
     	if (typeof window.template == 'undefined'){
-    		// /Shivergard\CustomSearch\CustomSearchController@getMust
+	    	$.ajax({
+				  url: "{{action("\Shivergard\CustomSearch\CustomSearchController@getMust")}}",
+				  data: request,
+				  success: function (result){
+				  	window.template = result;
+				  	window.renderResults(data);
+				  }
+			});
+    	}else{
+    		window.renderResults(data);
     	}
-    	Mustache.render("{{title}} spends {{calc}}", view);
-    	console.log(data);
     }
 </script>
 @endsection

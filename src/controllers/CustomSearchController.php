@@ -52,7 +52,8 @@ class CustomSearchController extends \Shivergard\CustomSearch\PackageController 
 	}
 
     public function getMust(){
-        Response::mst(view('custom-search::mustache.blocks'));
+       $instance = new Instance();
+       return \Response::mst(view('custom-search::mustache.blocks' , array('fields' => $instance->getAllColumnsNames())));
     }
 
 }
