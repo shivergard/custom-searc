@@ -70,6 +70,9 @@
     };
 
     window.ajaxSuccess = function(data){
+    	if (typeof window.template == 'undefined'){
+    		// /Shivergard\CustomSearch\CustomSearchController@getMust
+    	}
     	Mustache.render("{{title}} spends {{calc}}", view);
     	console.log(data);
     }

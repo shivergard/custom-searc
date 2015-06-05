@@ -52,7 +52,6 @@ class CustomSearchController extends \Shivergard\CustomSearch\PackageController 
 	}
 
     public function getMust(){
-
         Response::mst(view('custom-search::mustache.blocks'));
     }
 

@@ -16,6 +16,7 @@ use \Redirect;
 Route::get('/custom-search' , 'Shivergard\CustomSearch\CustomSearchController@init');
 Route::get('/custom-search/list' , 'Shivergard\CustomSearch\CustomSearchController@listFields');
 Route::get('/custom-search/individual' , 'Shivergard\CustomSearch\CustomSearchController@getInstance');
+Route::get('/custom-search/template' , 'Shivergard\CustomSearch\CustomSearchController@getMust');
 
 
 Route::get('/custom-search/{method}', function($method)
