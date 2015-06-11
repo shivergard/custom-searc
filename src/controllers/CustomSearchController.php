@@ -57,7 +57,7 @@ class CustomSearchController extends \Shivergard\CustomSearch\PackageController 
     public function getMust(){
        $instance = new Instance();
        if (Config::get('custom-search.preview_fields'))
-            $this->basePath = Config::get('custom-search.preview_fields');
+            $fields = Config::get('custom-search.preview_fields');
        else
             $fields = $instance->getAllColumnsNames();
 
