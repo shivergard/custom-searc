@@ -13,17 +13,20 @@ use \Shivergard\CustomSearch\Instance;
 
 class CustomSearchController extends \Shivergard\CustomSearch\PackageController {
 
-	public function __construct(){
+    public $basePath = 'custom-search::';
 
-	}
+    public function __construct(){
+        if (Config::get('custom-search.base_path'))
+            $this->basePath = Config::get('custom-search.base_path');
+    }
 
 
-	public function init(){	
-		return view('custom-search::custom-search');
-	}
+    public function init(){ 
+        return view('custom-search');
+    }
 
-	public function listFields(){
-		if(!\Request::ajax())
+    public function listFields(){
+        if(!\Request::ajax())
             return \Redirect::to(action("\Shivergard\CustomSearch\@init"));
 
         $response = array();
@@ -34,26 +37,31 @@ class CustomSearchController extends \Shivergard\CustomSearch\PackageController 
         }
 
         return \Response::json($response);
-	}
+    }
 
-	public function getInstance(){
-		if(!\Request::ajax())
+    public function getInstance(){
+        if(!\Request::ajax())
             return \Redirect::to(action("\Shivergard\CustomSearch\@init"));
 
         $return = array();
         $instance = Instance::where('id', \Input::get('id'));
 
         if ($instance->count() > 0){
-        	$return = $instance->first();
+            $return = $instance->first();
         }
 
         return \Response::json($return);
 
-	}
+    }
 
     public function getMust(){
        $instance = new Instance();
-       return \Response::mst(view('custom-search::mustache.blocks' , array('fields' => $instance->getAllColumnsNames())));
+       if (Config::get('custom-search.preview_fields'))
+            $this->basePath = Config::get('custom-search.preview_fields');
+       else
+            $fields = $instance->getAllColumnsNames();
+
+       return \Response::mst(view('custom-search::mustache.blocks' , array('fields' => )));
     }
 
 }
