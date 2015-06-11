@@ -22,7 +22,7 @@ class CustomSearchController extends \Shivergard\CustomSearch\PackageController 
 
 
     public function init(){ 
-        return view('custom-search');
+        return view($this->basePath.'custom-search');
     }
 
     public function listFields(){
@@ -61,7 +61,7 @@ class CustomSearchController extends \Shivergard\CustomSearch\PackageController 
        else
             $fields = $instance->getAllColumnsNames();
 
-       return \Response::mst(view('custom-search::mustache.blocks' , array('fields' => $fields)));
+       return \Response::mst(view($this->basePath.'mustache.blocks' , array('fields' => $fields)));
     }
 
 }
