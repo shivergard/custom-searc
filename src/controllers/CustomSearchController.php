@@ -61,7 +61,7 @@ class CustomSearchController extends \Shivergard\CustomSearch\PackageController 
        else
             $fields = $instance->getAllColumnsNames();
 
-       return \Response::mst(view('custom-search::mustache.blocks' , array('fields' => )));
+       return \Response::mst(view('custom-search::mustache.blocks' , array('fields' => $fields)));
     }
 
 }
